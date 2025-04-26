@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Health Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Community Health Tracker</h1>
+    <p>Track the health status of your community members.</p>
+  </header>
+
+  <main>
+    <form id="health-form">
+      <label for="name">Resident's Name:</label>
+      <input type="text" id="name" placeholder="Enter Name" required />
+
+      <label for="purok">Purok:</label>
+      <input type="text" id="purok" placeholder="Enter Purok" required />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" placeholder="Enter Age" required />
+
+      <label for="illness">Type of Illness:</label>
+      <input type="text" id="illness" placeholder="Enter Illness" required />
+
+      <label for="contact">Emergency Contact:</label>
+      <input type="text" id="contact" placeholder="Enter Emergency Contact" />
+
+      <label for="symptoms">Symptoms:</label>
+      <textarea id="symptoms" placeholder="Describe symptoms..." rows="4"></textarea>
+
+      <label for="contactMethod">Preferred Contact Method:</label>
+      <select id="contactMethod">
+        <option value="call">Call</option>
+        <option value="text">Text</option>
+        <option value="email">Email</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <section>
+      <h2>Submitted Reports</h2>
+      <ul id="report-list"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Community Health Tracker</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
