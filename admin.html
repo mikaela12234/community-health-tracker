@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Community Health Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Barangay Health Worker Login</h1>
+  </header>
+
+  <main>
+    <form id="admin-login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" placeholder="Enter Username" required />
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter Password" required />
+
+      <button type="submit">Login</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Community Health Tracker</p>
+  </footer>
+
+  <script>
+    // Handle login
+    document.getElementById('admin-login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Sample admin credentials (can be replaced with real authentication later)
+      const adminUsername = "healthworker"; 
+      const adminPassword = "password123"; 
+
+      // Get user input
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Check if the credentials are correct
+      if (username === adminUsername && password === adminPassword) {
+        // Store the logged-in status in SessionStorage
+        sessionStorage.setItem('loggedIn', 'true');
+
+        // Redirect to the Admin Dashboard page
+        window.location.href = 'dashboard.html';
+      } else {
+        alert('Incorrect username or password');
+      }
+    });
+  </script>
+</body>
+</html>

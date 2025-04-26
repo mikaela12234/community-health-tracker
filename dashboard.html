@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Community Health Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Barangay Health Worker Dashboard</h1>
+    <button id="logout-btn">Logout</button>
+  </header>
+
+  <main>
+    <h2>Submitted Reports</h2>
+    <ul id="report-list"></ul> <!-- Reports will be displayed here -->
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Community Health Tracker</p>
+  </footer>
+
+  <script>
+    // Check if the health worker is logged in
+    if (sessionStorage.getItem('loggedIn') !== 'true') {
+      // Redirect to the login page if not logged in
+      window.location.href = 'admin.html';
+    }
+
+    // Handle logout
+    document.getElementById('logout-btn').addEventListener('click', function() {
+      // Remove the logged-in status and redirect to login
+      sessionStorage.removeItem('loggedIn');
+      window.location.href = 'admin.html';
+    });
+
+    // Load submitted reports from localStorage
+    const reportList = document.getElementById('report-list');
+    const savedReports = JSON.parse(localStorage.getItem('reports')) || [];
+
+    // Display reports on the dashboard
+    savedReports.forEach(report => {
+      const reportItem = document.createElement('li');
+      reportItem.innerHTML = `
+        <strong>Name:</strong> ${report.name} <br>
+        <strong>Purok:</strong> ${report.purok} <br>
+        <strong>Age:</strong> ${report.age} <br>
+        <strong>Illness:</strong> ${report.illness} <br>
+        <strong>Emergency Contact:</strong> ${report.contact} <br>
+        <strong>Symptoms:</strong> ${report.symptoms} <br>
+        <strong>Preferred Contact:</strong> ${report.contactMethod} <br>
+        <strong>Date:</strong> ${report.date}
+      `;
+      
+      // Add a button to mark the report as delivered
+      const markDeliveredButton = document.createElement('button');
+      markDeliveredButton.innerText = 'Mark as Delivered';
+      markDeliveredButton.classList.add('delivered');
+      markDeliveredButton.onclick = function() {
+        reportItem.style.backgroundColor = '#d4edda'; // Change color to indicate it's delivered
+        report.delivered = true;
+
+        // Update localStorage to reflect the delivered status
+        const index = savedReports.findIndex(r => r.name === report.name && r.date === report.date);
+        savedReports[index].delivered = true;
+        localStorage.setItem('reports', JSON.stringify(savedReports));
+      };
+
+      reportItem.appendChild(markDeliveredButton);
+      reportList.appendChild(reportItem);
+    });
+  </script>
+</body>
+</html>
